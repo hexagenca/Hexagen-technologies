@@ -1,0 +1,6 @@
+# hexagen.ca
+# NOTE: replace https://www.hexagen.ca with the final production domain before launch.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.hexagen.ca/sitemap.xml

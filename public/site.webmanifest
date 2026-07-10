@@ -1,0 +1,17 @@
+{
+  "name": "Hexagen | AI Software Solutions",
+  "short_name": "Hexagen",
+  "description": "Hexagen builds secure AI software for workflow automation, document intelligence, conversational analytics, and custom enterprise solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0F1A",
+  "theme_color": "#0B0F1A",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
