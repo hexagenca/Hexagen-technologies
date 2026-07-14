@@ -18,6 +18,7 @@ export function BusinessOutcomes() {
             <AnimatedSection
               key={outcome.title}
               delay={index * 0.06}
+              tilt
               className="rounded-[var(--radius-xl)] border border-white/10 bg-white/[0.03] p-6"
             >
               <span className="mb-4 inline-flex size-11 items-center justify-center rounded-[var(--radius-md)] bg-white/10 text-[var(--color-accent)]">

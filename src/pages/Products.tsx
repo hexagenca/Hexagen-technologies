@@ -5,7 +5,8 @@ import { SectionHeading } from '@/components/common/SectionHeading'
 import { Button } from '@/components/common/Button'
 import { Accordion } from '@/components/common/Accordion'
 import { CTASection } from '@/components/common/CTASection'
-import { ProductCard } from '@/components/products/ProductCard'
+import { FlagshipShowcase } from '@/components/sections/FlagshipShowcase'
+import { ProductShowcaseDeck } from '@/components/products/ProductCarousel3D'
 import { ProductComparisonTable } from '@/components/products/ProductComparisonTable'
 import { products } from '@/data/products'
 import { productSelectionFaqs } from '@/data/faqs'
@@ -23,34 +24,32 @@ export default function Products() {
     <>
       <SEO
         title="AI Products | Hexagen"
-        description="Explore HexaChat, HexaDocs, HexaFlow, and HexaInsights — Hexagen's suite of AI products for knowledge, documents, workflows, and analytics."
+        description="DropWire — our live real-time media capture platform — plus HexaChat, HexaDocs, HexaFlow and HexaInsights, the applied-AI suite we're building for knowledge, documents, workflows and analytics."
         path="/products"
         structuredData={[breadcrumbListStructuredData([{ label: 'Home', path: '/' }, { label: 'Products', path: '/products' }])]}
       />
       <PageHero
         eyebrow="Products"
-        title="Four AI products built for practical business impact"
-        description="Each Hexagen product solves a specific operational problem. Used together, they form a complete layer of applied AI across your business."
+        title="One product live today, a suite on the way"
+        description="DropWire is shipping now for real-time media capture. Behind it, we're building a focused suite of AI applications that solve specific operational problems across your business."
         breadcrumbs={[{ label: 'Home', path: '/' }, { label: 'Products' }]}
       >
-        <Button to="/contact" variant="primary" size="lg">
-          Book a Demo
+        <Button href="https://green-wave-0ebabb60f.7.azurestaticapps.net/" external variant="primary" size="lg">
+          Explore DropWire
         </Button>
         <Button href="#comparison" variant="outline-light" size="lg">
           Compare Products
         </Button>
       </PageHero>
 
-      <section className="bg-[var(--color-surface-muted)] py-20 sm:py-24">
-        <Container>
-          <SectionHeading eyebrow="The suite" title="Meet the products" />
-          <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2">
-            {products.map((product, index) => (
-              <ProductCard key={product.slug} product={product} delay={index * 0.08} />
-            ))}
-          </div>
-        </Container>
-      </section>
+      <FlagshipShowcase />
+
+      <ProductShowcaseDeck
+        products={products}
+        eyebrow="The applied-AI suite"
+        title="What we're building next"
+        description="These four products are in active design. Each targets a distinct operational problem and is built to work with the others."
+      />
 
       <section id="comparison" className="scroll-mt-24 bg-white py-20 sm:py-24">
         <Container>

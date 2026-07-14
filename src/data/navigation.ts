@@ -1,10 +1,12 @@
 import type { NavigationItem } from '@/types'
+import { flagshipProduct } from '@/data/products'
 
 export const mainNavigation: NavigationItem[] = [
   {
     label: 'Products',
     path: '/products',
     children: [
+      { label: 'DropWire', path: flagshipProduct.href, description: 'Real-time media capture — live', external: true },
       { label: 'HexaChat', path: '/products/hexachat', description: 'AI knowledge assistant' },
       { label: 'HexaDocs', path: '/products/hexadocs', description: 'Document intelligence' },
       { label: 'HexaFlow', path: '/products/hexaflow', description: 'Workflow automation' },
@@ -28,6 +30,7 @@ export const mainNavigation: NavigationItem[] = [
 
 export const footerNavigation = {
   products: [
+    { label: 'DropWire', path: flagshipProduct.href, external: true },
     { label: 'HexaChat', path: '/products/hexachat' },
     { label: 'HexaDocs', path: '/products/hexadocs' },
     { label: 'HexaFlow', path: '/products/hexaflow' },

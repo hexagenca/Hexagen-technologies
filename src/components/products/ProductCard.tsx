@@ -1,6 +1,6 @@
 import { ArrowRight, Check } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import type { Product } from '@/types'
+import type { Product, ProductStatus } from '@/types'
 import { AnimatedSection } from '@/components/common/AnimatedSection'
 import { ProductMockup } from './ProductMockup'
 import { cn } from '@/utils/cn'
@@ -10,15 +10,31 @@ interface ProductCardProps {
   delay?: number
 }
 
+const statusStyles: Record<ProductStatus, { label: string; className: string }> = {
+  live: { label: 'Live', className: 'border-emerald-200 bg-emerald-50 text-emerald-700' },
+  beta: { label: 'Beta', className: 'border-amber-200 bg-amber-50 text-amber-700' },
+  concept: { label: 'Concept', className: 'border-[var(--color-surface-border)] bg-[var(--color-surface-alt)] text-[var(--color-text-onlight-muted)]' },
+}
+
 export function ProductCard({ product, delay = 0 }: ProductCardProps) {
   const Icon = product.icon
 
   return (
     <AnimatedSection
       delay={delay}
+      tilt
       className="group flex flex-col overflow-hidden rounded-[var(--radius-2xl)] border border-[var(--color-surface-border)] bg-white shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-elevated)]"
     >
-      <div className="p-3">
+      <div className="relative p-3">
+        <span
+          className={cn(
+            'absolute right-5 top-5 z-10 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide',
+            statusStyles[product.status].className,
+          )}
+        >
+          {product.status === 'live' && <span className="size-1.5 rounded-full bg-emerald-500" />}
+          {statusStyles[product.status].label}
+        </span>
         <ProductMockup type={product.mockup} compact />
       </div>
 

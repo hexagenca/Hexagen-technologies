@@ -20,6 +20,7 @@ export function SolutionsSection() {
             <AnimatedSection
               key={solution.slug}
               delay={index * 0.06}
+              tilt
               className="flex flex-col rounded-[var(--radius-xl)] border border-[var(--color-surface-border)] bg-white p-6 shadow-[var(--shadow-soft)] transition-shadow hover:shadow-[var(--shadow-elevated)]"
             >
               <span className="mb-4 inline-flex size-11 items-center justify-center rounded-[var(--radius-md)] bg-gradient-brand-soft text-[var(--color-primary-dark)]">

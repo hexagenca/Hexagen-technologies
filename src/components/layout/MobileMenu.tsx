@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'motion/react'
-import { ChevronDown } from 'lucide-react'
+import { ArrowUpRight, ChevronDown } from 'lucide-react'
 import type { NavigationItem } from '@/types'
 import { Button } from '@/components/common/Button'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -48,13 +48,26 @@ export function MobileMenu({ items, onNavigate, menuId }: MobileMenuProps) {
                     <ul id={`mobile-submenu-${item.label}`} className="pb-2 pl-4">
                       {item.children.map((child) => (
                         <li key={child.path}>
-                          <NavLink
-                            to={child.path}
-                            onClick={onNavigate}
-                            className="block min-h-11 py-2.5 text-sm text-white/70 hover:text-white"
-                          >
-                            {child.label}
-                          </NavLink>
+                          {child.external ? (
+                            <a
+                              href={child.path}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              onClick={onNavigate}
+                              className="flex min-h-11 items-center gap-1.5 py-2.5 text-sm text-white/70 hover:text-white"
+                            >
+                              {child.label}
+                              <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                            </a>
+                          ) : (
+                            <NavLink
+                              to={child.path}
+                              onClick={onNavigate}
+                              className="block min-h-11 py-2.5 text-sm text-white/70 hover:text-white"
+                            >
+                              {child.label}
+                            </NavLink>
+                          )}
                         </li>
                       ))}
                     </ul>

@@ -35,6 +35,8 @@ interface ButtonAsLink extends BaseProps {
 interface ButtonAsAnchor extends BaseProps {
   href: string
   to?: undefined
+  /** Opens in a new tab with safe rel attributes. */
+  external?: boolean
 }
 
 type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsAnchor
@@ -80,9 +82,15 @@ export function Button(props: ButtonProps) {
   }
 
   if ('href' in props && props.href) {
+    const external = 'external' in props && props.external
     return (
       <motion.div className="inline-block" {...motionProps}>
-        <a href={props.href} onClick={onClick} className={classes}>
+        <a
+          href={props.href}
+          onClick={onClick}
+          className={classes}
+          {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+        >
           {children}
           {icon}
         </a>

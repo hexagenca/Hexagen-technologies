@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'motion/react'
-import { ChevronDown, Menu, X } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react'
 import { Logo } from '@/components/common/Logo'
 import { Button } from '@/components/common/Button'
 import { MobileMenu } from './MobileMenu'
@@ -95,27 +95,54 @@ export function Navbar() {
                         aria-label={item.label}
                         className="absolute left-0 top-full mt-2 w-64 overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-surface-border)] bg-white p-2 shadow-[var(--shadow-elevated)]"
                       >
-                        {item.children.map((child) => (
-                          <li key={child.path} role="none">
-                            <NavLink
-                              role="menuitem"
-                              to={child.path}
-                              className={({ isActive: childActive }) =>
-                                cn(
-                                  'flex min-h-11 flex-col justify-center rounded-[var(--radius-md)] px-3.5 py-2.5 text-sm transition-colors',
-                                  childActive
-                                    ? 'bg-[var(--color-surface-alt)] text-[var(--color-primary-dark)]'
-                                    : 'text-[var(--color-text-onlight)] hover:bg-[var(--color-surface-alt)]',
-                                )
-                              }
-                            >
-                              <span className="font-semibold">{child.label}</span>
+                        {item.children.map((child) => {
+                          const childContent = (
+                            <>
+                              <span className="flex items-center gap-1.5 font-semibold">
+                                {child.label}
+                                {child.external ? (
+                                  <ArrowUpRight className="size-3.5 text-[var(--color-primary-dark)]" aria-hidden="true" />
+                                ) : null}
+                              </span>
                               {child.description ? (
                                 <span className="text-xs text-[var(--color-text-onlight-muted)]">{child.description}</span>
                               ) : null}
-                            </NavLink>
-                          </li>
-                        ))}
+                            </>
+                          )
+                          const baseClass =
+                            'flex min-h-11 flex-col justify-center rounded-[var(--radius-md)] px-3.5 py-2.5 text-sm transition-colors'
+
+                          return (
+                            <li key={child.path} role="none">
+                              {child.external ? (
+                                <a
+                                  role="menuitem"
+                                  href={child.path}
+                                  target="_blank"
+                                  rel="noreferrer noopener"
+                                  className={cn(baseClass, 'text-[var(--color-text-onlight)] hover:bg-[var(--color-surface-alt)]')}
+                                >
+                                  {childContent}
+                                </a>
+                              ) : (
+                                <NavLink
+                                  role="menuitem"
+                                  to={child.path}
+                                  className={({ isActive: childActive }) =>
+                                    cn(
+                                      baseClass,
+                                      childActive
+                                        ? 'bg-[var(--color-surface-alt)] text-[var(--color-primary-dark)]'
+                                        : 'text-[var(--color-text-onlight)] hover:bg-[var(--color-surface-alt)]',
+                                    )
+                                  }
+                                >
+                                  {childContent}
+                                </NavLink>
+                              )}
+                            </li>
+                          )
+                        })}
                       </ul>
                     ) : null}
                   </AnimatePresence>

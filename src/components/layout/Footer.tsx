@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Mail, MapPin, Phone, Link2 } from 'lucide-react'
+import { Mail, MapPin, Phone, Link2, ArrowUpRight } from 'lucide-react'
 import { Logo } from '@/components/common/Logo'
 import { Container } from '@/components/common/Container'
 import { company } from '@/data/company'
@@ -7,7 +7,7 @@ import { footerNavigation } from '@/data/navigation'
 
 interface FooterColumnProps {
   title: string
-  links: { label: string; path: string }[]
+  links: { label: string; path: string; external?: boolean }[]
 }
 
 function FooterColumn({ title, links }: FooterColumnProps) {
@@ -17,9 +17,21 @@ function FooterColumn({ title, links }: FooterColumnProps) {
       <ul className="flex flex-col gap-2.5">
         {links.map((link) => (
           <li key={link.label}>
-            <Link to={link.path} className="text-sm text-white/70 transition-colors hover:text-white">
-              {link.label}
-            </Link>
+            {link.external ? (
+              <a
+                href={link.path}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-1.5 text-sm text-white/70 transition-colors hover:text-white"
+              >
+                {link.label}
+                <ArrowUpRight className="size-3.5" aria-hidden="true" />
+              </a>
+            ) : (
+              <Link to={link.path} className="text-sm text-white/70 transition-colors hover:text-white">
+                {link.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
