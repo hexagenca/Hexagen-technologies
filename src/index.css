@@ -116,6 +116,26 @@ h4 {
   .animate-marquee {
     animation: marquee 34s linear infinite;
   }
+
+  /* Light sweep across primary buttons on hover — pure transform, decorative */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shine::after {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 55%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: translateX(-130%) skewX(-18deg);
+  }
+
+  .btn-shine:hover::after {
+    transform: translateX(260%) skewX(-18deg);
+    transition: transform 0.65s ease;
+  }
 }
 
 @keyframes marquee {
@@ -130,5 +150,9 @@ h4 {
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
+  }
+
+  .btn-shine::after {
+    display: none;
   }
 }

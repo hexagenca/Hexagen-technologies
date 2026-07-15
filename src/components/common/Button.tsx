@@ -43,7 +43,7 @@ type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsAnchor
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    'bg-gradient-brand text-white shadow-[var(--shadow-glow-primary)] hover:brightness-110',
+    'btn-shine bg-gradient-brand text-white shadow-[var(--shadow-glow-primary)] hover:brightness-110',
   secondary:
     'bg-white text-[var(--color-text-onlight)] border border-[var(--color-surface-border)] shadow-[var(--shadow-soft)] hover:border-[var(--color-primary)]',
   ghost: 'bg-transparent text-[var(--color-text-onlight)] hover:bg-[var(--color-surface-alt)]',

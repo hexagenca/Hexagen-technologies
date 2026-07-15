@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react'
 import { Logo } from '@/components/common/Logo'
 import { Button } from '@/components/common/Button'
@@ -12,6 +13,7 @@ import { cn } from '@/utils/cn'
 
 export function Navbar() {
   const scrolled = useScrolled(16)
+  const reducedMotion = useReducedMotion()
   const location = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
@@ -90,9 +92,14 @@ export function Navbar() {
                   </button>
                   <AnimatePresence>
                     {isOpen ? (
-                      <ul
+                      <motion.ul
                         role="menu"
                         aria-label={item.label}
+                        initial={reducedMotion ? false : { opacity: 0, y: -6, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={reducedMotion ? undefined : { opacity: 0, y: -6, scale: 0.98 }}
+                        transition={{ duration: 0.18, ease: 'easeOut' }}
+                        style={{ transformOrigin: 'top left' }}
                         className="absolute left-0 top-full mt-2 w-64 overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-surface-border)] bg-white p-2 shadow-[var(--shadow-elevated)]"
                       >
                         {item.children.map((child) => {
@@ -143,7 +150,7 @@ export function Navbar() {
                             </li>
                           )
                         })}
-                      </ul>
+                      </motion.ul>
                     ) : null}
                   </AnimatePresence>
                 </li>
