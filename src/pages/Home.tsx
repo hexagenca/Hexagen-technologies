@@ -3,16 +3,13 @@ import { Hero } from '@/components/sections/Hero'
 import { CredibilityStrip } from '@/components/sections/CredibilityStrip'
 import { FlagshipShowcase } from '@/components/sections/FlagshipShowcase'
 import { KineticBand } from '@/components/sections/KineticBand'
-import { ProductsSection } from '@/components/sections/ProductsSection'
-import { ProductShowcaseSection } from '@/components/sections/ProductShowcaseSection'
+import { ServicesSection } from '@/components/sections/ServicesSection'
 import { AudiencePaths } from '@/components/sections/AudiencePaths'
-import { BusinessOutcomes } from '@/components/sections/BusinessOutcomes'
 import { HowItWorks } from '@/components/sections/HowItWorks'
+import { BusinessOutcomes } from '@/components/sections/BusinessOutcomes'
 import { SolutionsSection } from '@/components/sections/SolutionsSection'
 import { IntegrationSection } from '@/components/sections/IntegrationSection'
 import { SecuritySection } from '@/components/sections/SecuritySection'
-import { ServicesSection } from '@/components/sections/ServicesSection'
-import { CaseStudySection } from '@/components/sections/CaseStudySection'
 import { AboutSection } from '@/components/sections/AboutSection'
 import { FinalCTASection } from '@/components/sections/FinalCTASection'
 import { organizationStructuredData } from '@/utils/structuredData'
@@ -21,8 +18,8 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Hexagen | AI Software Solutions for Modern Businesses"
-        description="Hexagen builds secure AI software for workflow automation, document intelligence, conversational analytics, and custom enterprise solutions."
+        title="Hexagen | AI Products & Services for Modern Businesses"
+        description="Hexagen ships DropWire — a live real-time mobile capture platform — and builds custom AI systems for workflow automation, document intelligence, and analytics."
         path="/"
         structuredData={[organizationStructuredData()]}
       />
@@ -30,16 +27,13 @@ export default function Home() {
       <CredibilityStrip />
       <FlagshipShowcase />
       <KineticBand />
-      <ProductsSection />
-      <ProductShowcaseSection />
+      <ServicesSection />
       <AudiencePaths />
-      <BusinessOutcomes />
       <HowItWorks />
+      <BusinessOutcomes />
       <SolutionsSection />
       <IntegrationSection />
       <SecuritySection />
-      <ServicesSection />
-      <CaseStudySection />
       <AboutSection />
       <FinalCTASection />
     </>

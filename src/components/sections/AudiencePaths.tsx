@@ -43,7 +43,7 @@ export function AudiencePaths() {
         <SectionHeading
           eyebrow="Find your starting point"
           title="Where should you start?"
-          description="Tell us what you're trying to do and we'll point you to the right place — whether that's our live product or the applied-AI suite."
+          description="Tell us what you're trying to do and we'll point you to the right place — whether that's our live product or the right service engagement."
         />
 
         <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-10">
@@ -122,17 +122,17 @@ export function AudiencePaths() {
                     <ActiveIcon className="size-6" strokeWidth={1.75} aria-hidden="true" />
                   </span>
                   <div>
-                    <p className="text-lg font-semibold text-[var(--color-text-onlight)]">{active.productName}</p>
+                    <p className="text-lg font-semibold text-[var(--color-text-onlight)]">{active.name}</p>
                     <span
                       className={cn(
                         'mt-0.5 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide',
-                        active.status === 'live'
+                        active.kind === 'product'
                           ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
                           : 'border-[var(--color-surface-border)] bg-[var(--color-surface-alt)] text-[var(--color-text-onlight-muted)]',
                       )}
                     >
-                      {active.status === 'live' && <span className="size-1.5 rounded-full bg-emerald-500" />}
-                      {active.status === 'live' ? 'Live' : 'Concept'}
+                      {active.kind === 'product' && <span className="size-1.5 rounded-full bg-emerald-500" />}
+                      {active.kind === 'product' ? 'Live product' : 'Service'}
                     </span>
                   </div>
                 </div>

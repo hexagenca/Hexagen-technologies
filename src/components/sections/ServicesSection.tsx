@@ -10,8 +10,8 @@ export function ServicesSection() {
       <Container>
         <SectionHeading
           eyebrow="Services"
-          title="The implementation layer behind every product"
-          description="Hexagen products are backed by hands-on services that get them running inside your business correctly."
+          title="Custom AI, designed and built around your business"
+          description="Beyond DropWire, our services team takes AI from roadmap to production — strategy, custom development, integration, and ongoing operations."
         />
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.slice(0, 4).map((service, index) => (

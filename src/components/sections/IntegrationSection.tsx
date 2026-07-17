@@ -22,7 +22,7 @@ export function IntegrationSection() {
           tone="dark"
           eyebrow="Integrations"
           title="AI that works with the systems you already use"
-          description="Hexagen products are built to connect with the categories of systems most businesses already run — not to replace them."
+          description="Everything Hexagen builds is designed to connect with the categories of systems most businesses already run — not to replace them."
         />
 
         <div className="relative mx-auto mt-16 aspect-square w-full max-w-xl">

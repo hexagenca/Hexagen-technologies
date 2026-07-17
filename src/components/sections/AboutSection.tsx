@@ -26,7 +26,7 @@ export function AboutSection() {
             </h2>
             <p className="mt-5 text-lg font-medium text-[var(--color-primary-dark)]">{company.slogan}</p>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--color-text-onlight-muted)]">
-              Hexagen builds secure AI products that help organizations automate operations, understand their
+              Hexagen builds secure AI products and services that help organizations automate operations, understand their
               data, improve customer experiences, and make faster decisions.
             </p>
             <Button to="/about" variant="secondary" size="lg" className="mt-8" icon={<ArrowRight className="size-4" aria-hidden="true" />}>

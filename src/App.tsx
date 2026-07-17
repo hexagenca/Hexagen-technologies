@@ -1,10 +1,9 @@
 import { Suspense, lazy } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Layout } from '@/components/layout/Layout'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Products = lazy(() => import('@/pages/Products'))
-const ProductDetailPage = lazy(() => import('@/pages/ProductDetailPage'))
 const Solutions = lazy(() => import('@/pages/Solutions'))
 const Services = lazy(() => import('@/pages/Services'))
 const About = lazy(() => import('@/pages/About'))
@@ -30,7 +29,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="products" element={<Products />} />
-          <Route path="products/:slug" element={<ProductDetailPage />} />
+          <Route path="products/:slug" element={<Navigate to="/products" replace />} />
           <Route path="solutions" element={<Solutions />} />
           <Route path="services" element={<Services />} />
           <Route path="about" element={<About />} />

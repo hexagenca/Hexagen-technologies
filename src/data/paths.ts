@@ -1,18 +1,19 @@
-import { QrCode, MessageSquareText, ScanSearch, Workflow, BarChart4 } from 'lucide-react'
-import type { IconType, ProductStatus } from '@/types'
+import { QrCode, Compass, Code2, Plug, LifeBuoy } from 'lucide-react'
+import type { IconType } from '@/types'
 import { flagshipProduct } from '@/data/products'
 
 /**
- * "I need to…" self-segmentation paths for the Enterprise-Gateway-style
- * starting-point selector. Each path maps a visitor goal to the right product
- * and destination. Content is factual: live products link out to the running
- * product, conceptual ones link to their detail page.
+ * "I need to…" self-segmentation paths for the starting-point selector. Each
+ * path maps a visitor goal to the right destination: our live product links
+ * out to the running app, and service paths link to the matching service
+ * section. Content is factual — no conceptual products.
  */
 export interface AudiencePath {
   id: string
   goal: string
-  productName: string
-  status: ProductStatus
+  /** What the visitor lands on: the live product or a Hexagen service. */
+  kind: 'product' | 'service'
+  name: string
   icon: IconType
   headline: string
   description: string
@@ -25,8 +26,8 @@ export const audiencePaths: AudiencePath[] = [
   {
     id: 'capture',
     goal: 'Capture photos & documents from a phone',
-    productName: 'DropWire',
-    status: 'live',
+    kind: 'product',
+    name: 'DropWire',
     icon: QrCode,
     headline: 'DropWire turns any phone into a capture device',
     description:
@@ -36,51 +37,51 @@ export const audiencePaths: AudiencePath[] = [
     ctaLabel: 'Explore DropWire',
   },
   {
-    id: 'answers',
-    goal: 'Answer internal questions instantly',
-    productName: 'HexaChat',
-    status: 'concept',
-    icon: MessageSquareText,
-    headline: 'HexaChat answers from your own knowledge',
+    id: 'roadmap',
+    goal: 'Figure out where AI fits in my business',
+    kind: 'service',
+    name: 'AI Strategy & Consulting',
+    icon: Compass,
+    headline: 'Start with a practical AI roadmap',
     description:
-      'A secure assistant grounded in your documents, policies and procedures — with role-based access and verifiable citations, so teams get consistent answers without opening a ticket.',
-    href: '/products/hexachat',
-    ctaLabel: 'See HexaChat',
+      'We help you identify where AI can create the most value in your operations, prioritize the use cases worth building, and leave you with a realistic implementation plan — not a slide deck of hype.',
+    href: '/services#strategy',
+    ctaLabel: 'See strategy services',
   },
   {
-    id: 'documents',
-    goal: 'Turn documents into structured data',
-    productName: 'HexaDocs',
-    status: 'concept',
-    icon: ScanSearch,
-    headline: 'HexaDocs extracts, classifies and validates',
+    id: 'build',
+    goal: 'Build a custom AI product or feature',
+    kind: 'service',
+    name: 'Custom AI Development',
+    icon: Code2,
+    headline: 'We design and build AI around your processes',
     description:
-      'Invoices, contracts and forms are classified, extracted and checked against your business rules — turning unstructured documents into clean, usable data with human review where it matters.',
-    href: '/products/hexadocs',
-    ctaLabel: 'See HexaDocs',
+      'From assistants grounded in your own documents to document processing and workflow automation, we build production-ready AI systems tailored to your data, constraints and security requirements.',
+    href: '/services#development',
+    ctaLabel: 'See development services',
   },
   {
-    id: 'automate',
-    goal: 'Automate a multi-step process',
-    productName: 'HexaFlow',
-    status: 'concept',
-    icon: Workflow,
-    headline: 'HexaFlow coordinates work across systems',
+    id: 'integrate',
+    goal: 'Connect AI to the systems we already run',
+    kind: 'service',
+    name: 'AI Integrations',
+    icon: Plug,
+    headline: 'AI that fits into your existing operations',
     description:
-      'Connect the tools your teams already use and automate multi-step processes end to end, with structured approvals and human-in-the-loop checkpoints for the steps that need judgement.',
-    href: '/products/hexaflow',
-    ctaLabel: 'See HexaFlow',
+      'We connect AI systems to the platforms your teams already rely on, so automation reduces manual handoffs instead of creating another disconnected tool.',
+    href: '/services#integrations',
+    ctaLabel: 'See integration services',
   },
   {
-    id: 'insights',
-    goal: 'Get answers from my business data',
-    productName: 'HexaInsights',
-    status: 'concept',
-    icon: BarChart4,
-    headline: 'HexaInsights answers in plain language',
+    id: 'operate',
+    goal: 'Keep a deployed AI system reliable',
+    kind: 'service',
+    name: 'Managed AI Services',
+    icon: LifeBuoy,
+    headline: 'We run and improve AI systems in production',
     description:
-      'Ask questions about your business data and get direct answers, automated reports and surfaced trends — unifying multiple sources into one consistent view for faster decisions.',
-    href: '/products/hexainsights',
-    ctaLabel: 'See HexaInsights',
+      'Deployed AI needs monitoring, maintenance and continuous improvement. We keep your systems reliable as your data, usage and business evolve.',
+    href: '/services#managed-services',
+    ctaLabel: 'See managed services',
   },
 ]

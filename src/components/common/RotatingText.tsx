@@ -30,11 +30,14 @@ export function RotatingText({ words, className, interval = 2600 }: RotatingText
   }
 
   return (
-    <span className="relative inline-block align-bottom">
-      {/* Invisible sizer keeps layout stable at the widest phrase. */}
-      <span aria-hidden="true" className="invisible whitespace-nowrap">
-        {words.reduce((a, b) => (b.length > a.length ? b : a), '')}
-      </span>
+    <span className="relative inline-grid align-bottom">
+      {/* Invisible sizers stacked in one grid cell keep layout stable at the
+          widest phrase — measured in pixels, not characters. */}
+      {words.map((word) => (
+        <span key={word} aria-hidden="true" className="invisible col-start-1 row-start-1 whitespace-nowrap">
+          {word}
+        </span>
+      ))}
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={words[index]}

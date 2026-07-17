@@ -10,7 +10,7 @@ export function SecuritySection() {
         <SectionHeading
           eyebrow="Security & responsible AI"
           title="Designed with enterprise security principles in mind"
-          description="Every Hexagen product is built around access control, oversight, and evaluation from the start — not added on afterward."
+          description="Everything Hexagen builds starts with access control, oversight, and evaluation — not added on afterward."
         />
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {securityPrinciples.map((principle, index) => (

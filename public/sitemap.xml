@@ -3,10 +3,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.hexagen.ca/</loc><priority>1.0</priority></url>
   <url><loc>https://www.hexagen.ca/products</loc><priority>0.9</priority></url>
-  <url><loc>https://www.hexagen.ca/products/hexachat</loc><priority>0.8</priority></url>
-  <url><loc>https://www.hexagen.ca/products/hexadocs</loc><priority>0.8</priority></url>
-  <url><loc>https://www.hexagen.ca/products/hexaflow</loc><priority>0.8</priority></url>
-  <url><loc>https://www.hexagen.ca/products/hexainsights</loc><priority>0.8</priority></url>
   <url><loc>https://www.hexagen.ca/solutions</loc><priority>0.8</priority></url>
   <url><loc>https://www.hexagen.ca/services</loc><priority>0.8</priority></url>
   <url><loc>https://www.hexagen.ca/about</loc><priority>0.6</priority></url>

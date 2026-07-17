@@ -29,7 +29,7 @@ const sections: LegalSection[] = [
   {
     heading: '4. Product and service terms',
     paragraphs: [
-      'Use of Hexagen products (HexaChat, HexaDocs, HexaFlow, HexaInsights) and services is subject to separate agreements provided at the time of engagement.',
+      'Use of Hexagen products (such as DropWire) and services is subject to separate agreements provided at the time of engagement.',
     ],
   },
   {

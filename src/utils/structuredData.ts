@@ -1,5 +1,5 @@
 import { company } from '@/data/company'
-import type { Product } from '@/types'
+import type { FlagshipProduct } from '@/types'
 
 export function organizationStructuredData() {
   return {
@@ -21,7 +21,7 @@ export function organizationStructuredData() {
   }
 }
 
-export function softwareApplicationStructuredData(product: Product) {
+export function softwareApplicationStructuredData(product: FlagshipProduct) {
   return {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -29,7 +29,7 @@ export function softwareApplicationStructuredData(product: Product) {
     description: product.description,
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
-    url: `${company.siteUrl}/products/${product.slug}`,
+    url: product.href,
     publisher: {
       '@type': 'Organization',
       name: company.name,

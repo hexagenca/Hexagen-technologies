@@ -6,7 +6,7 @@ import { AnimatedSection } from '@/components/common/AnimatedSection'
 import { Button } from '@/components/common/Button'
 import { CTASection } from '@/components/common/CTASection'
 import { solutions } from '@/data/solutions'
-import { getProductBySlug } from '@/data/products'
+import { getServiceBySlug } from '@/data/services'
 import { breadcrumbListStructuredData } from '@/utils/structuredData'
 
 export default function Solutions() {
@@ -14,14 +14,14 @@ export default function Solutions() {
     <>
       <SEO
         title="Solutions by Business Function | Hexagen"
-        description="See how Hexagen's AI products apply to customer support, operations, finance, HR, sales, and legal & compliance teams."
+        description="See how Hexagen builds AI for customer support, operations, finance, HR, sales, and legal & compliance teams."
         path="/solutions"
         structuredData={[breadcrumbListStructuredData([{ label: 'Home', path: '/' }, { label: 'Solutions', path: '/solutions' }])]}
       />
       <PageHero
         eyebrow="Solutions"
         title="AI solutions organized around your business functions"
-        description="Rather than generic AI features, Hexagen maps its products to the specific challenges each team already faces."
+        description="Rather than generic AI features, Hexagen builds around the specific challenges each team already faces."
         breadcrumbs={[{ label: 'Home', path: '/' }, { label: 'Solutions' }]}
       />
 
@@ -29,7 +29,7 @@ export default function Solutions() {
         <Container>
           <div className="flex flex-col gap-16">
             {solutions.map((solution) => {
-              const relatedProducts = solution.relatedProducts.map((slug) => getProductBySlug(slug)).filter(Boolean)
+              const relatedServices = solution.relatedServices.map((slug) => getServiceBySlug(slug)).filter(Boolean)
 
               return (
                 <AnimatedSection
@@ -43,10 +43,10 @@ export default function Solutions() {
                     </span>
                     <h2 className="text-2xl font-semibold text-[var(--color-text-onlight)]">{solution.name}</h2>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {relatedProducts.map((product) =>
-                        product ? (
-                          <Button key={product.slug} to={`/products/${product.slug}`} variant="secondary" size="md">
-                            {product.name}
+                      {relatedServices.map((service) =>
+                        service ? (
+                          <Button key={service.slug} to={`/services#${service.slug}`} variant="secondary" size="md">
+                            {service.name}
                           </Button>
                         ) : null,
                       )}
@@ -100,7 +100,7 @@ export default function Solutions() {
       <CTASection
         eyebrow="Your team"
         title="Not seeing your exact challenge?"
-        description="Most business processes map to more than one product. Talk to our team about how Hexagen would fit your specific workflow."
+        description="Most business processes span more than one team and system. Talk to our team about how Hexagen would fit your specific workflow."
       >
         <Button to="/contact" variant="primary" size="lg">
           Book a Demo

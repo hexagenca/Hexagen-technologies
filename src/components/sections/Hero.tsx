@@ -15,7 +15,7 @@ const trustIndicators = [
   { label: 'Built in Canada', icon: MapPinned },
 ]
 
-const rotatingCapabilities = ['automate workflows', 'surface insights', 'process documents', 'answer questions']
+const rotatingCapabilities = ['capture in real time', 'automate workflows', 'process documents', 'answer questions']
 
 export function Hero() {
   const reducedMotion = useReducedMotion()
@@ -74,23 +74,25 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h1 className="text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            {/* Fluid type: the clamp keeps the widest rotating phrase on one
+                unclipped line from 320px up through the two-column layout. */}
+            <h1 className="text-balance text-[clamp(1.5rem,8.4vw,2.25rem)] font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[clamp(2.5rem,4.3vw,3.5rem)]">
               <span className="block">AI software built to</span>
               <RotatingText words={rotatingCapabilities} className="text-gradient-brand" />
             </h1>
             <p className="mt-6 max-w-xl text-balance text-lg leading-relaxed text-[var(--color-text-ondark-muted)]">
-              Automate workflows, unlock insights, and create better customer experiences with secure AI
-              solutions designed around your business.
+              Hexagen ships DropWire — a live, real-time mobile capture platform — and designs, builds and
+              runs custom AI systems around your business, from strategy to production.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <Magnetic>
                 <Button to="/products" variant="primary" size="lg" icon={<ArrowRight className="size-4" aria-hidden="true" />}>
-                  Explore Our Products
+                  Explore DropWire
                 </Button>
               </Magnetic>
-              <Button to="/contact" variant="outline-light" size="lg">
-                Book an AI Consultation
+              <Button to="/services" variant="outline-light" size="lg">
+                See Our Services
               </Button>
             </div>
 

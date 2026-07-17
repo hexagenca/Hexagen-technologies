@@ -21,12 +21,12 @@ export default function Services() {
       />
       <PageHero
         eyebrow="Services"
-        title="The hands-on layer behind every Hexagen product"
-        description="Products alone rarely solve a business problem. Our services team scopes, builds, integrates, and supports the AI systems that make them work inside your organization."
+        title="AI services, from strategy to production"
+        description="Software alone rarely solves a business problem. Our services team scopes, builds, integrates, and operates the AI systems that make it work inside your organization."
         breadcrumbs={[{ label: 'Home', path: '/' }, { label: 'Services' }]}
       >
         <Button to="/contact" variant="primary" size="lg">
-          Book a Demo
+          Book an AI Consultation
         </Button>
       </PageHero>
 

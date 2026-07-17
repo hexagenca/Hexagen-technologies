@@ -6,16 +6,23 @@ export const mainNavigation: NavigationItem[] = [
     label: 'Products',
     path: '/products',
     children: [
-      { label: 'DropWire', path: flagshipProduct.href, description: 'Real-time media capture — live', external: true },
-      { label: 'HexaChat', path: '/products/hexachat', description: 'AI knowledge assistant' },
-      { label: 'HexaDocs', path: '/products/hexadocs', description: 'Document intelligence' },
-      { label: 'HexaFlow', path: '/products/hexaflow', description: 'Workflow automation' },
-      { label: 'HexaInsights', path: '/products/hexainsights', description: 'Conversational analytics' },
-      { label: 'View All Products', path: '/products' },
+      { label: 'DropWire', path: flagshipProduct.href, description: 'Real-time mobile capture — live', external: true },
+      { label: 'Developer docs', path: flagshipProduct.docsHref, description: 'SDKs, guides and API reference', external: true },
+      { label: 'Product overview', path: '/products', description: 'How DropWire works and what it ships with' },
+    ],
+  },
+  {
+    label: 'Services',
+    path: '/services',
+    children: [
+      { label: 'AI Strategy & Consulting', path: '/services#strategy', description: 'Roadmaps and prioritized use cases' },
+      { label: 'Custom AI Development', path: '/services#development', description: 'Purpose-built AI products and features' },
+      { label: 'AI Integrations', path: '/services#integrations', description: 'AI connected to your existing systems' },
+      { label: 'Managed AI Services', path: '/services#managed-services', description: 'Monitoring and continuous improvement' },
+      { label: 'All services', path: '/services' },
     ],
   },
   { label: 'Solutions', path: '/solutions' },
-  { label: 'Services', path: '/services' },
   { label: 'About', path: '/about' },
   {
     label: 'Resources',
@@ -31,11 +38,8 @@ export const mainNavigation: NavigationItem[] = [
 export const footerNavigation = {
   products: [
     { label: 'DropWire', path: flagshipProduct.href, external: true },
-    { label: 'HexaChat', path: '/products/hexachat' },
-    { label: 'HexaDocs', path: '/products/hexadocs' },
-    { label: 'HexaFlow', path: '/products/hexaflow' },
-    { label: 'HexaInsights', path: '/products/hexainsights' },
-    { label: 'All Products', path: '/products' },
+    { label: 'Developer Docs', path: flagshipProduct.docsHref, external: true },
+    { label: 'Product Overview', path: '/products' },
   ],
   solutions: [
     { label: 'Customer Support', path: '/solutions#customer-support' },

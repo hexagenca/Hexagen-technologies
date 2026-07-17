@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react'
-import { products } from '@/data/products'
+import { flagshipProduct } from '@/data/products'
+import { services } from '@/data/services'
 import { company } from '@/data/company'
 import { submitDemoRequest } from '@/utils/forms'
 import { isRequired, isValidEmail } from '@/utils/validation'
@@ -35,6 +36,7 @@ const initialState: FormState = {
 }
 
 const industries = ['Professional Services', 'Financial Services', 'Healthcare', 'Retail', 'Manufacturing', 'Technology', 'Other']
+const interests = [flagshipProduct.name, ...services.map((service) => service.name)]
 const timelines = ['Immediately', 'Within 1 month', '1–3 months', '3–6 months', 'Just exploring']
 
 type Errors = Partial<Record<keyof FormState, string>>
@@ -204,7 +206,7 @@ export function ContactForm() {
           </select>
         </FormField>
 
-        <FormField label="Preferred product" htmlFor="preferredProduct">
+        <FormField label="What are you interested in?" htmlFor="preferredProduct">
           <select
             id="preferredProduct"
             className={inputClasses}
@@ -212,9 +214,9 @@ export function ContactForm() {
             onChange={(event) => updateField('preferredProduct', event.target.value)}
           >
             <option value="">Not sure yet</option>
-            {products.map((product) => (
-              <option key={product.slug} value={product.name}>
-                {product.name}
+            {interests.map((interest) => (
+              <option key={interest} value={interest}>
+                {interest}
               </option>
             ))}
           </select>

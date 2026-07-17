@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'motion/react'
 import { ArrowUpRight, BookOpen } from 'lucide-react'
 import { Container } from '@/components/common/Container'
 import { Button } from '@/components/common/Button'
@@ -5,6 +7,7 @@ import { AnimatedSection } from '@/components/common/AnimatedSection'
 import { DropWireCaptureSim } from '@/components/products/DropWireCaptureSim'
 import { flagshipProduct } from '@/data/products'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { cn } from '@/utils/cn'
 
 /**
@@ -18,8 +21,17 @@ export function FlagshipShowcase({ className }: { className?: string }) {
   const reducedMotion = useReducedMotion()
   const product = flagshipProduct
 
+  // Gentle counter-scroll on the capture sim (desktop only): the demo drifts
+  // against the page as the section passes, giving the panel physical depth.
+  const sectionRef = useRef<HTMLElement>(null)
+  const desktop = useMediaQuery('(min-width: 1024px)')
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] })
+  const simY = useTransform(scrollYProgress, [0, 1], [44, -44])
+  const parallax = desktop && !reducedMotion
+
   return (
     <section
+      ref={sectionRef}
       className={cn('relative overflow-hidden bg-[var(--color-ink)] py-20 sm:py-28', className)}
       style={{ backgroundImage: 'var(--gradient-hero-glow)' }}
     >
@@ -75,18 +87,20 @@ export function FlagshipShowcase({ className }: { className?: string }) {
           </AnimatedSection>
 
           {/* Live capture simulation — the product demonstrating itself */}
-          <AnimatedSection delay={0.1} className="relative flex flex-col items-center">
-            <div
-              aria-hidden="true"
-              className="absolute -inset-6 rounded-[var(--radius-2xl)] opacity-70 blur-2xl"
-              style={{ background: 'var(--gradient-brand-soft)' }}
-            />
-            <div className="relative flex w-full justify-center">
-              <DropWireCaptureSim />
-            </div>
-            <code className="relative mt-6 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2 font-mono text-xs text-white/60">
-              const s = await dw.createSession()
-            </code>
+          <AnimatedSection delay={0.1} className="relative">
+            <motion.div style={parallax ? { y: simY } : undefined} className="flex flex-col items-center">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-6 rounded-[var(--radius-2xl)] opacity-70 blur-2xl"
+                style={{ background: 'var(--gradient-brand-soft)' }}
+              />
+              <div className="relative flex w-full justify-center">
+                <DropWireCaptureSim />
+              </div>
+              <code className="relative mt-6 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2 font-mono text-xs text-white/60">
+                const s = await dw.createSession()
+              </code>
+            </motion.div>
           </AnimatedSection>
         </div>
       </Container>

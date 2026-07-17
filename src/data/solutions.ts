@@ -1,6 +1,11 @@
 import { Headset, Settings2, Landmark, Users, TrendingUp, Scale } from 'lucide-react'
 import type { Solution } from '@/types'
 
+/**
+ * Function-level solutions describe what Hexagen builds for each team through
+ * its services — capability claims only, no invented products, customers or
+ * metrics.
+ */
 export const solutions: Solution[] = [
   {
     slug: 'customer-support',
@@ -9,12 +14,12 @@ export const solutions: Solution[] = [
     challenge:
       'Support teams face repetitive questions and rising ticket volume, making it hard to keep response times consistent.',
     approach:
-      'HexaChat gives support teams and self-serve customers instant, cited answers pulled from your actual documentation and policies.',
+      'We build AI assistants grounded in your actual documentation and policies, so agents and self-serve customers get consistent, cited answers — with escalation to a human for anything ambiguous.',
     benefit: 'Faster responses and more consistent answers across the support team.',
-    relatedProducts: ['hexachat', 'hexainsights'],
+    relatedServices: ['development', 'integrations'],
     exampleWorkflow: [
       'A customer or agent asks a question in plain language',
-      'HexaChat searches the private knowledge base for relevant policies and past resolutions',
+      'The assistant searches your knowledge base for relevant policies and past resolutions',
       'A cited answer is returned, with escalation to a human for anything ambiguous',
     ],
   },
@@ -25,12 +30,12 @@ export const solutions: Solution[] = [
     challenge:
       'Manual, multi-step processes create bottlenecks and inconsistent execution across operational teams.',
     approach:
-      'HexaFlow automates repetitive operational processes end-to-end while keeping approvals and oversight where they matter.',
+      'We automate repetitive operational processes end-to-end — connected to the systems you already run, with approvals and human oversight kept where they matter.',
     benefit: 'Fewer manual steps and more consistent process execution.',
-    relatedProducts: ['hexaflow', 'hexadocs'],
+    relatedServices: ['development', 'integrations'],
     exampleWorkflow: [
       'An operational request or trigger enters the workflow',
-      'HexaFlow coordinates the relevant systems and required approvals',
+      'The automation coordinates the relevant systems and required approvals',
       'The process completes with a full audit trail of every step',
     ],
   },
@@ -41,13 +46,13 @@ export const solutions: Solution[] = [
     challenge:
       'Invoices, expense documents, and approvals require significant manual review before they can be processed.',
     approach:
-      'HexaDocs extracts and validates financial document data, while HexaFlow routes it through the right approval chain.',
+      'We build document-processing pipelines that extract and validate financial data against your business rules, then route it through the right approval chain into your finance systems.',
     benefit: 'Less manual data entry and faster approval cycles.',
-    relatedProducts: ['hexadocs', 'hexaflow'],
+    relatedServices: ['development', 'data-engineering'],
     exampleWorkflow: [
       'An invoice or financial document is submitted',
-      'HexaDocs extracts and validates key fields',
-      'HexaFlow routes the validated data through approval and into your finance systems',
+      'Key fields are extracted and validated against your business rules',
+      'Validated data is routed through approval and into your finance systems',
     ],
   },
   {
@@ -57,13 +62,13 @@ export const solutions: Solution[] = [
     challenge:
       'HR teams field repeated policy questions while manually coordinating onboarding tasks across departments.',
     approach:
-      'HexaChat answers policy questions directly, while HexaFlow coordinates onboarding steps across systems and teams.',
+      'We build assistants that answer policy questions directly from your HR documentation, and automations that coordinate onboarding steps across systems and teams.',
     benefit: 'Fewer repetitive questions reaching HR and smoother onboarding.',
-    relatedProducts: ['hexachat', 'hexaflow'],
+    relatedServices: ['development', 'integrations'],
     exampleWorkflow: [
       'A new hire or employee has a policy question or onboarding need',
-      'HexaChat answers policy questions directly from HR documentation',
-      'HexaFlow coordinates any required onboarding tasks across departments',
+      'Policy questions are answered directly from your HR documentation',
+      'Required onboarding tasks are coordinated across departments automatically',
     ],
   },
   {
@@ -73,12 +78,12 @@ export const solutions: Solution[] = [
     challenge:
       'Sales teams need fast visibility into pipeline and performance without waiting on manual reporting.',
     approach:
-      'HexaInsights lets sales and revenue teams ask direct questions about pipeline, performance, and trends in plain language.',
+      'We connect and model your CRM and revenue data, then put a plain-language answer layer on top so sales leaders can ask direct questions about pipeline, performance and trends.',
     benefit: 'Faster visibility into performance and trends.',
-    relatedProducts: ['hexainsights'],
+    relatedServices: ['data-engineering', 'development'],
     exampleWorkflow: [
       'A sales leader asks a question about pipeline or performance',
-      'HexaInsights queries connected CRM and business data',
+      'The system queries connected CRM and business data',
       'A clear, direct answer or report is returned',
     ],
   },
@@ -89,13 +94,13 @@ export const solutions: Solution[] = [
     challenge:
       'Contracts and compliance documents require careful review, and finding the current policy version can be slow.',
     approach:
-      'HexaDocs surfaces key clauses and obligations in contracts, while HexaChat gives teams instant access to current policies.',
+      'We build review tooling that surfaces key clauses and obligations in contracts, alongside assistants that give teams instant access to the current version of every policy.',
     benefit: 'Faster document review and more consistent policy answers.',
-    relatedProducts: ['hexadocs', 'hexachat'],
+    relatedServices: ['development', 'evaluation'],
     exampleWorkflow: [
       'A contract or compliance document is submitted for review',
-      'HexaDocs highlights key clauses, obligations, and risk areas',
-      'Teams confirm current policy details through HexaChat as needed',
+      'Key clauses, obligations and risk areas are highlighted for the team',
+      'Teams confirm current policy details through the internal assistant as needed',
     ],
   },
 ]
