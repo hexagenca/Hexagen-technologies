@@ -1,12 +1,10 @@
-import { QrCode, Compass, Code2, Plug, LifeBuoy } from 'lucide-react'
+import { Compass, Code2, Plug, LifeBuoy } from 'lucide-react'
 import type { IconType } from '@/types'
-import { flagshipProduct } from '@/data/products'
 
 /**
  * "I need to…" self-segmentation paths for the starting-point selector. Each
- * path maps a visitor goal to the right destination: our live product links
- * out to the running app, and service paths link to the matching service
- * section. Content is factual — no conceptual products.
+ * path maps a visitor goal to the matching Hexagen service engagement. Content
+ * is factual — no conceptual products.
  */
 export interface AudiencePath {
   id: string
@@ -23,19 +21,6 @@ export interface AudiencePath {
 }
 
 export const audiencePaths: AudiencePath[] = [
-  {
-    id: 'capture',
-    goal: 'Capture photos & documents from a phone',
-    kind: 'product',
-    name: 'DropWire',
-    icon: QrCode,
-    headline: 'DropWire turns any phone into a capture device',
-    description:
-      'Show a QR code and photos, documents, video, signatures and voice notes stream straight into your app in real time — no native install. It is live today, with SDKs for TypeScript, Python, PHP and React Native.',
-    href: flagshipProduct.href,
-    external: true,
-    ctaLabel: 'Explore DropWire',
-  },
   {
     id: 'roadmap',
     goal: 'Figure out where AI fits in my business',

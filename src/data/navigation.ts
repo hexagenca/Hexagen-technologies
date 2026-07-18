@@ -24,14 +24,7 @@ export const mainNavigation: NavigationItem[] = [
   },
   { label: 'Solutions', path: '/solutions' },
   { label: 'About', path: '/about' },
-  {
-    label: 'Resources',
-    children: [
-      { label: 'Careers', path: '/careers', description: 'Join the Hexagen team' },
-      { label: 'Privacy Policy', path: '/privacy' },
-      { label: 'Terms of Service', path: '/terms' },
-    ],
-  },
+  { label: 'Careers', path: '/careers' },
   { label: 'Contact', path: '/contact' },
 ]
 
@@ -60,9 +53,5 @@ export const footerNavigation = {
     { label: 'About Us', path: '/about' },
     { label: 'Careers', path: '/careers' },
     { label: 'Contact', path: '/contact' },
-  ],
-  legal: [
-    { label: 'Privacy Policy', path: '/privacy' },
-    { label: 'Terms of Service', path: '/terms' },
   ],
 }

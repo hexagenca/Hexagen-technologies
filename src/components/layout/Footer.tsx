@@ -91,15 +91,7 @@ export function Footer() {
           <p className="text-sm text-white/50">
             &copy; {year} {company.name}. All rights reserved.
           </p>
-          <ul className="flex items-center gap-6">
-            {footerNavigation.legal.map((link) => (
-              <li key={link.label}>
-                <Link to={link.path} className="text-sm text-white/50 hover:text-white">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <p className="text-sm text-white/50">{company.slogan}</p>
         </div>
       </Container>
     </footer>

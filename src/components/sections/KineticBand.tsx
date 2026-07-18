@@ -3,13 +3,13 @@ import { motion, useScroll, useTransform } from 'motion/react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 /**
- * Scroll-linked kinetic type band naming the media types DropWire streams. The
- * outlined headline drifts horizontally as the band passes through the
+ * Scroll-linked kinetic type band naming what Hexagen does across the business.
+ * The outlined headline drifts horizontally as the band passes through the
  * viewport — driven by a MotionValue (useScroll → useTransform on x), so no
  * React state updates on scroll. Under prefers-reduced-motion it holds still
  * and simply reads as a static band of type. Decorative, hence aria-hidden.
  */
-const WORDS = 'PHOTOS · DOCUMENTS · VIDEO · SIGNATURES · VOICE NOTES · '
+const WORDS = 'STRATEGY · BUILD · INTEGRATE · AUTOMATE · SECURE · SCALE · '
 
 export function KineticBand() {
   const ref = useRef<HTMLDivElement>(null)
@@ -26,7 +26,7 @@ export function KineticBand() {
           className="whitespace-nowrap text-[11vw] font-black uppercase leading-none tracking-tight text-transparent sm:text-[7vw]"
         >
           <span style={stroke}>{WORDS}</span>
-          <span className="text-[var(--color-primary-light)]">LIVE</span>
+          <span className="text-[var(--color-primary-light)]">AI</span>
           <span style={stroke}> · {WORDS}</span>
         </motion.p>
       </div>

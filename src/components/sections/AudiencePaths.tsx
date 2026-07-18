@@ -43,7 +43,7 @@ export function AudiencePaths() {
         <SectionHeading
           eyebrow="Find your starting point"
           title="Where should you start?"
-          description="Tell us what you're trying to do and we'll point you to the right place — whether that's our live product or the right service engagement."
+          description="Tell us what you're trying to do and we'll point you to the right service engagement to get there."
         />
 
         <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-10">

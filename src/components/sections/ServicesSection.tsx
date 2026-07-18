@@ -11,7 +11,7 @@ export function ServicesSection() {
         <SectionHeading
           eyebrow="Services"
           title="Custom AI, designed and built around your business"
-          description="Beyond DropWire, our services team takes AI from roadmap to production — strategy, custom development, integration, and ongoing operations."
+          description="Our services team takes AI from roadmap to production — strategy, custom development, integration, and ongoing operations."
         />
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.slice(0, 4).map((service, index) => (
