@@ -17,7 +17,7 @@ import { cn } from '@/utils/cn'
  * live product rather than an internal detail page. All motion is
  * transform/opacity and collapses to static content under reduced motion.
  */
-export function FlagshipShowcase({ className }: { className?: string }) {
+export function FlagshipShowcase({ className, id }: { className?: string; id?: string }) {
   const reducedMotion = useReducedMotion()
   const product = flagshipProduct
 
@@ -32,7 +32,8 @@ export function FlagshipShowcase({ className }: { className?: string }) {
   return (
     <section
       ref={sectionRef}
-      className={cn('relative overflow-hidden bg-[var(--color-ink)] py-20 sm:py-28', className)}
+      id={id}
+      className={cn('relative scroll-mt-24 overflow-hidden bg-[var(--color-ink)] py-20 sm:py-28', className)}
       style={{ backgroundImage: 'var(--gradient-hero-glow)' }}
     >
       <Container>

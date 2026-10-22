@@ -11,7 +11,14 @@ import { useReducedMotion } from '@/hooks/useReducedMotion'
  */
 const WORDS = 'STRATEGY · BUILD · INTEGRATE · AUTOMATE · SECURE · SCALE · '
 
-export function KineticBand() {
+interface KineticBandProps {
+  /** The outlined run of words, ending in a separator. Defaults to the home page's. */
+  words?: string
+  /** The one solid, brand-coloured word set between the two runs. */
+  accent?: string
+}
+
+export function KineticBand({ words = WORDS, accent = 'AI' }: KineticBandProps) {
   const ref = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
@@ -25,9 +32,9 @@ export function KineticBand() {
           style={reducedMotion ? undefined : { x }}
           className="whitespace-nowrap text-[11vw] font-black uppercase leading-none tracking-tight text-transparent sm:text-[7vw]"
         >
-          <span style={stroke}>{WORDS}</span>
-          <span className="text-[var(--color-primary-light)]">AI</span>
-          <span style={stroke}> · {WORDS}</span>
+          <span style={stroke}>{words}</span>
+          <span className="text-[var(--color-primary-light)]">{accent}</span>
+          <span style={stroke}> · {words}</span>
         </motion.p>
       </div>
     </section>

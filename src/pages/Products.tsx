@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, BookOpen, QrCode, Radio, TerminalSquare } from 'lucide-react'
+import { ArrowDown, ArrowRight, QrCode, Radio, TerminalSquare } from 'lucide-react'
 import { PageHero } from '@/components/layout/PageHero'
 import { SEO } from '@/components/layout/SEO'
 import { Container } from '@/components/common/Container'
@@ -8,6 +8,8 @@ import { Accordion } from '@/components/common/Accordion'
 import { AnimatedSection } from '@/components/common/AnimatedSection'
 import { CTASection } from '@/components/common/CTASection'
 import { FlagshipShowcase } from '@/components/sections/FlagshipShowcase'
+import { ProductLineup } from '@/components/products/ProductLineup'
+import { tmsProduct } from '@/data/tms'
 import { flagshipProduct } from '@/data/products'
 import { engagementFaqs } from '@/data/faqs'
 import { breadcrumbListStructuredData, softwareApplicationStructuredData } from '@/utils/structuredData'
@@ -36,35 +38,38 @@ export default function Products() {
   return (
     <>
       <SEO
-        title="DropWire — Real-Time Mobile Capture | Hexagen"
-        description="DropWire is Hexagen's live product: show a QR code and photos, documents, video, signatures and voice notes stream straight into your app — no native install."
+        title="Products — Hexagen TMS and DropWire | Hexagen"
+        description="Hexagen's live products: Hexagen TMS runs trucking operations from quote to invoice, and DropWire streams photos, documents, video and signatures from any phone into your app."
         path="/products"
         structuredData={[
           breadcrumbListStructuredData([{ label: 'Home', path: '/' }, { label: 'Products', path: '/products' }]),
+          softwareApplicationStructuredData(tmsProduct),
           softwareApplicationStructuredData(flagshipProduct),
         ]}
       />
       <PageHero
         eyebrow="Products"
-        title="DropWire — real-time capture from any phone"
-        description="Our live product turns a QR code into a capture device: photos, documents, video, signatures and voice notes stream straight into your app, live over the web."
+        title="Software we build and run"
+        description="Hexagen TMS runs trucking operations from quote to invoice. DropWire turns any phone into a capture device for your app. Both are live today."
         breadcrumbs={[{ label: 'Home', path: '/' }, { label: 'Products' }]}
       >
-        <Button href={flagshipProduct.href} external variant="primary" size="lg" icon={<ArrowUpRight className="size-4" aria-hidden="true" />}>
-          Explore DropWire
+        <Button to={tmsProduct.overviewPath} variant="primary" size="lg" icon={<ArrowRight className="size-4" aria-hidden="true" />}>
+          Explore Hexagen TMS
         </Button>
-        <Button href={flagshipProduct.docsHref} external variant="outline-light" size="lg" icon={<BookOpen className="size-4" aria-hidden="true" />}>
-          Developer docs
+        <Button href="#dropwire" variant="outline-light" size="lg" icon={<ArrowDown className="size-4" aria-hidden="true" />}>
+          Explore DropWire
         </Button>
       </PageHero>
 
-      <FlagshipShowcase />
+      <ProductLineup />
+
+      <FlagshipShowcase id="dropwire" />
 
       <section className="bg-white py-20 sm:py-24">
         <Container>
           <SectionHeading
             eyebrow="How it works"
-            title="A capture session in three steps"
+            title="DropWire: a capture session in three steps"
             description="DropWire is an API platform: your backend opens a session, your customer's phone does the capturing, and the files land back in your app."
           />
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
@@ -142,7 +147,7 @@ export default function Products() {
         <Container className="max-w-4xl">
           <AnimatedSection className="flex flex-col items-start justify-between gap-6 rounded-[var(--radius-2xl)] border border-[var(--color-surface-border)] bg-[var(--color-surface-muted)] p-8 sm:flex-row sm:items-center sm:p-10">
             <div>
-              <h2 className="text-2xl font-semibold text-[var(--color-text-onlight)]">Need something DropWire doesn&rsquo;t do?</h2>
+              <h2 className="text-2xl font-semibold text-[var(--color-text-onlight)]">Need something our products don&rsquo;t do?</h2>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-[var(--color-text-onlight-muted)]">
                 Products are half the story. Our services team designs and builds custom AI — assistants, document
                 processing, workflow automation and analytics — around your data and systems.
@@ -166,10 +171,13 @@ export default function Products() {
 
       <CTASection
         eyebrow="Ready when you are"
-        title="Try DropWire or talk to our team"
-        description="DropWire is live today — or book a consultation and we'll scope what a custom build would look like for your business."
+        title="Try our products or talk to our team"
+        description="Hexagen TMS and DropWire are live today — or book a consultation and we'll scope what a custom build would look like for your business."
       >
-        <Button href={flagshipProduct.href} external variant="primary" size="lg">
+        <Button to={tmsProduct.overviewPath} variant="primary" size="lg">
+          Explore Hexagen TMS
+        </Button>
+        <Button href={flagshipProduct.href} external variant="outline-light" size="lg">
           Explore DropWire
         </Button>
         <Button to="/contact" variant="outline-light" size="lg">
