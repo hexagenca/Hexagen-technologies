@@ -1,14 +1,16 @@
 import type { NavigationItem } from '@/types'
 import { flagshipProduct } from '@/data/products'
+import { tmsProduct } from '@/data/tms'
 
 export const mainNavigation: NavigationItem[] = [
   {
     label: 'Products',
     path: '/products',
     children: [
+      { label: 'Hexagen TMS', path: tmsProduct.overviewPath, description: 'Transportation management — live' },
       { label: 'DropWire', path: flagshipProduct.href, description: 'Real-time mobile capture — live', external: true },
-      { label: 'Developer docs', path: flagshipProduct.docsHref, description: 'SDKs, guides and API reference', external: true },
-      { label: 'Product overview', path: '/products', description: 'How DropWire works and what it ships with' },
+      { label: 'DropWire developer docs', path: flagshipProduct.docsHref, description: 'SDKs, guides and API reference', external: true },
+      { label: 'All products', path: '/products', description: 'Every Hexagen product in one place' },
     ],
   },
   {
@@ -30,9 +32,10 @@ export const mainNavigation: NavigationItem[] = [
 
 export const footerNavigation = {
   products: [
+    { label: 'Hexagen TMS', path: tmsProduct.overviewPath },
     { label: 'DropWire', path: flagshipProduct.href, external: true },
-    { label: 'Developer Docs', path: flagshipProduct.docsHref, external: true },
-    { label: 'Product Overview', path: '/products' },
+    { label: 'DropWire Docs', path: flagshipProduct.docsHref, external: true },
+    { label: 'All Products', path: '/products' },
   ],
   solutions: [
     { label: 'Customer Support', path: '/solutions#customer-support' },

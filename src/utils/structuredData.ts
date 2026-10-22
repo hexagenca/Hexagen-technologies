@@ -1,5 +1,5 @@
 import { company } from '@/data/company'
-import type { FlagshipProduct } from '@/types'
+import type { ProductSummary } from '@/types'
 
 export function organizationStructuredData() {
   return {
@@ -21,7 +21,7 @@ export function organizationStructuredData() {
   }
 }
 
-export function softwareApplicationStructuredData(product: FlagshipProduct) {
+export function softwareApplicationStructuredData(product: ProductSummary) {
   return {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',

@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react'
 import { flagshipProduct } from '@/data/products'
+import { tmsProduct } from '@/data/tms'
 import { services } from '@/data/services'
 import { company } from '@/data/company'
 import { submitDemoRequest } from '@/utils/forms'
@@ -36,7 +37,7 @@ const initialState: FormState = {
 }
 
 const industries = ['Professional Services', 'Financial Services', 'Healthcare', 'Retail', 'Manufacturing', 'Technology', 'Other']
-const interests = [flagshipProduct.name, ...services.map((service) => service.name)]
+const interests = [tmsProduct.name, flagshipProduct.name, ...services.map((service) => service.name)]
 const timelines = ['Immediately', 'Within 1 month', '1–3 months', '3–6 months', 'Just exploring']
 
 type Errors = Partial<Record<keyof FormState, string>>

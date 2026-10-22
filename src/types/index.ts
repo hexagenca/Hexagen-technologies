@@ -4,7 +4,7 @@ export type IconType = ComponentType<{ className?: string; strokeWidth?: number 
 
 /**
  * Where a product sits on the maturity curve. Kept honest and visible in the
- * UI: DropWire ships today (`live`).
+ * UI: DropWire and Hexagen TMS both ship today (`live`).
  */
 export type ProductStatus = 'live' | 'beta'
 
@@ -24,6 +24,38 @@ export interface FlagshipProduct {
   highlights: { icon: IconType; label: string; description: string }[]
   codeSnippet: { text: string; kind: 'comment' | 'code' }[]
   captureChips: string[]
+}
+
+/** The fields structured data and cross-links need from any Hexagen product. */
+export type ProductSummary = Pick<FlagshipProduct, 'slug' | 'name' | 'tagline' | 'description' | 'status' | 'href'>
+
+export interface IconPoint {
+  icon: IconType
+  label: string
+  description: string
+}
+
+/**
+ * Hexagen TMS lives at its own domain like DropWire, but also has an overview
+ * page on this site (`overviewPath`) carrying a real product recording.
+ */
+export interface TmsProduct extends ProductSummary {
+  overviewPath: string
+  productTourHref: string
+  pricingHref: string
+  trialHref: string
+  highlights: IconPoint[]
+  lifecycle: { icon: IconType; title: string; description: string }[]
+  replaces: string[]
+  tour: { src: { webm: string; mp4: string }; poster: string; durationSeconds: number; chapters: { label: string; at: number; caption: string }[] }
+  modules: IconPoint[]
+  audiences: IconPoint[]
+  hena: { question: string; answer: string; rows: { ref: string; state: string; tone: 'ok' | 'warn' }[]; capabilities: string[] }
+  integrations: string[]
+  trust: IconPoint[]
+  plans: { name: string; price: string; unit: string; summary: string; footnote: string; href: string; cta: string; featured?: boolean }[]
+  demo: { tripId: string; lane: string; statuses: string[]; views: { icon: IconType; label: string }[] }
+  faq: FAQ[]
 }
 
 export interface Service {

@@ -4,7 +4,7 @@ export const engagementFaqs: FAQ[] = [
   {
     question: 'We are not sure where to start with Hexagen. What is the first step?',
     answer:
-      'Most teams start with the problem, not the technology. If you need to capture photos, documents or signatures from customers’ phones, DropWire is live today and you can try it immediately. For everything else — assistants, document processing, workflow automation, analytics — a short AI consultation is the fastest way to scope what we would build for you.',
+      'Most teams start with the problem, not the technology. If you run trucks or broker freight, Hexagen TMS is live today. If you need to capture photos, documents or signatures from customers’ phones, DropWire is live too, and you can try either immediately. For everything else — assistants, document processing, workflow automation, analytics — a short AI consultation is the fastest way to scope what we would build for you.',
   },
   {
     question: 'Is DropWire ready to use in production?',
@@ -14,7 +14,7 @@ export const engagementFaqs: FAQ[] = [
   {
     question: 'Do Hexagen solutions require replacing our existing systems?',
     answer:
-      'No. Both DropWire and our custom builds are designed to integrate with the systems you already use rather than replace them.',
+      'No. Hexagen TMS, DropWire and our custom builds are all designed to integrate with the systems you already use rather than replace them.',
   },
   {
     question: 'How does Hexagen approach data security?',
