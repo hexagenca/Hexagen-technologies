@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
+import { preload } from 'react-dom'
 import { motion } from 'motion/react'
 import { ArrowUpRight, Lock, Play } from 'lucide-react'
 import { tmsProduct } from '@/data/tms'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { cn } from '@/utils/cn'
 
 const { chapters, src, poster, durationSeconds } = tmsProduct.tour
@@ -25,16 +27,25 @@ function chapterAt(time: number) {
  * The product demonstrating itself: a real screen recording of the TMS demo
  * account (a fictional carrier with fictional data), framed in a browser
  * window, with a chapter list that seeks the recording. Nothing loads until the
- * tour scrolls into view (`preload="none"` plus the poster frame); it then plays
- * muted, and pauses again once it leaves. Under prefers-reduced-motion it never
- * starts on its own — the poster stays until someone presses play or a chapter.
+ * tour scrolls into view (`preload="none"` plus the poster frame); on tablet and
+ * desktop it then plays muted, and pauses again once it leaves. On phones — and
+ * under prefers-reduced-motion — it never starts on its own, so nobody pays for
+ * the recording's megabytes just by scrolling past: the poster stays until
+ * someone presses play or a chapter.
+ *
+ * `priority` preloads the poster when the tour sits in the first screen, where
+ * it is the largest thing painted. `tone` matches the surface it sits on.
  * The recording has burned-in captions and no audio, and the active chapter's
  * caption is repeated as text below it.
  */
-export function TmsTour() {
+export function TmsTour({ tone = 'light', priority = false }: { tone?: 'light' | 'dark'; priority?: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const frameRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
+  const largeScreen = useMediaQuery('(min-width: 768px)')
+  const autoplay = largeScreen && !reducedMotion
+  const dark = tone === 'dark'
+  if (priority) preload(poster, { as: 'image', fetchPriority: 'high' })
   const [active, setActive] = useState(0)
   const [started, setStarted] = useState(false)
   const [failed, setFailed] = useState(false)
@@ -42,7 +53,7 @@ export function TmsTour() {
   useEffect(() => {
     const video = videoRef.current
     const frame = frameRef.current
-    if (!video || !frame || reducedMotion) return
+    if (!video || !frame || !autoplay) return
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -57,7 +68,7 @@ export function TmsTour() {
     )
     observer.observe(frame)
     return () => observer.disconnect()
-  }, [reducedMotion])
+  }, [autoplay])
 
   const seek = (index: number) => {
     const video = videoRef.current
@@ -136,11 +147,18 @@ export function TmsTour() {
           </div>
         </div>
 
-        <p className="mt-4 min-h-[3rem] text-sm leading-relaxed text-[var(--color-text-onlight-muted)]">
-          <span className="font-semibold text-[var(--color-text-onlight)]">{chapters[active].label}.</span>{' '}
+        <p
+          className={cn(
+            'mt-4 min-h-[3rem] text-sm leading-relaxed',
+            dark ? 'text-[var(--color-text-ondark-muted)]' : 'text-[var(--color-text-onlight-muted)]',
+          )}
+        >
+          <span className={cn('font-semibold', dark ? 'text-white' : 'text-[var(--color-text-onlight)]')}>
+            {chapters[active].label}.
+          </span>{' '}
           {chapters[active].caption}
         </p>
-        <p className="mt-1 text-xs text-[var(--color-text-onlight-muted)]">
+        <p className={cn('mt-1 text-xs', dark ? 'text-white/50' : 'text-[var(--color-text-onlight-muted)]')}>
           A real recording of the product, made on our demo account. The company and every record in it are fictional.
         </p>
       </div>
@@ -157,16 +175,23 @@ export function TmsTour() {
                   aria-current={isActive ? 'step' : undefined}
                   className={cn(
                     'relative flex min-h-11 w-full items-center justify-between gap-3 overflow-hidden rounded-[var(--radius-md)] px-4 py-2.5 text-left text-sm font-medium transition-colors',
-                    isActive
-                      ? 'text-[var(--color-primary-dark)]'
-                      : 'text-[var(--color-text-onlight-muted)] hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-text-onlight)]',
+                    dark
+                      ? isActive
+                        ? 'text-white'
+                        : 'text-white/60 hover:bg-white/5 hover:text-white'
+                      : isActive
+                        ? 'text-[var(--color-primary-dark)]'
+                        : 'text-[var(--color-text-onlight-muted)] hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-text-onlight)]',
                   )}
                 >
                   {isActive ? (
                     <motion.span
                       layoutId={reducedMotion ? undefined : 'tms-tour-active'}
                       aria-hidden="true"
-                      className="absolute inset-0 rounded-[var(--radius-md)] bg-gradient-brand-soft ring-1 ring-[var(--color-primary)]/30"
+                      className={cn(
+                        'absolute inset-0 rounded-[var(--radius-md)] ring-1',
+                        dark ? 'bg-white/10 ring-white/15' : 'bg-gradient-brand-soft ring-[var(--color-primary)]/30',
+                      )}
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   ) : null}

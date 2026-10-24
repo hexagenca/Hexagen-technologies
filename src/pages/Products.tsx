@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, QrCode, Radio, TerminalSquare } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUpRight, QrCode, Radio, TerminalSquare } from 'lucide-react'
 import { PageHero } from '@/components/layout/PageHero'
 import { SEO } from '@/components/layout/SEO'
 import { Container } from '@/components/common/Container'
@@ -53,7 +53,7 @@ export default function Products() {
         description="Hexagen TMS runs trucking operations from quote to invoice. DropWire turns any phone into a capture device for your app. Both are live today."
         breadcrumbs={[{ label: 'Home', path: '/' }, { label: 'Products' }]}
       >
-        <Button to={tmsProduct.overviewPath} variant="primary" size="lg" icon={<ArrowRight className="size-4" aria-hidden="true" />}>
+        <Button href={tmsProduct.href} external variant="primary" size="lg" icon={<ArrowUpRight className="size-4" aria-hidden="true" />}>
           Explore Hexagen TMS
         </Button>
         <Button href="#dropwire" variant="outline-light" size="lg" icon={<ArrowDown className="size-4" aria-hidden="true" />}>
@@ -174,7 +174,7 @@ export default function Products() {
         title="Try our products or talk to our team"
         description="Hexagen TMS and DropWire are live today — or book a consultation and we'll scope what a custom build would look like for your business."
       >
-        <Button to={tmsProduct.overviewPath} variant="primary" size="lg">
+        <Button href={tmsProduct.href} external variant="primary" size="lg">
           Explore Hexagen TMS
         </Button>
         <Button href={flagshipProduct.href} external variant="outline-light" size="lg">

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useInView } from 'motion/react'
 import { Check, Truck } from 'lucide-react'
 import { tmsProduct } from '@/data/tms'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -7,32 +7,31 @@ import { useReducedMotion } from '@/hooks/useReducedMotion'
 const { tripId, lane, statuses, views } = tmsProduct.demo
 
 /**
- * Hero visual for the TMS overview: one trip record moves through its lifecycle and
- * every view that reads it updates in the same beat — "one record, every view".
- * Decorative only (aria-hidden); with reduced motion it renders a static "In transit".
+ * One trip record moves through its lifecycle and every view that reads it
+ * updates in the same beat — "one record, every view". It only cycles while
+ * on screen. Decorative (aria-hidden): the section around it says the same in
+ * text. With reduced motion it renders a static "In transit".
  */
 export function TripPropagationVisual() {
   const reduceMotion = useReducedMotion()
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { amount: 0.3 })
   const [step, setStep] = useState(2)
   const current = reduceMotion ? 2 : step
+  const live = inView && !reduceMotion
 
   useEffect(() => {
-    if (reduceMotion) return
+    if (!live) return
     const delay = step === statuses.length - 1 ? 3600 : 2200
     const id = window.setTimeout(() => setStep((s) => (s + 1) % statuses.length), delay)
     return () => window.clearTimeout(id)
-  }, [step, reduceMotion])
+  }, [step, live])
 
   const status = statuses[current]
   const progress = (current / (statuses.length - 1)) * 100
 
   return (
-    <motion.div
-      animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
-      transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-      className="w-full max-w-[440px]"
-      aria-hidden="true"
-    >
+    <div ref={ref} className="w-full max-w-[440px]" aria-hidden="true">
       <div className="rounded-[var(--radius-xl)] bg-white/[0.04] p-5 shadow-[var(--shadow-glow-primary)] ring-1 ring-white/10 backdrop-blur-sm">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex gap-1.5">
@@ -43,7 +42,7 @@ export function TripPropagationVisual() {
           <span className="flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-medium text-white">
             <motion.span
               className="size-1.5 rounded-full bg-emerald-400"
-              animate={reduceMotion ? undefined : { opacity: [1, 0.3, 1] }}
+              animate={live ? { opacity: [1, 0.3, 1] } : undefined}
               transition={{ duration: 1.6, repeat: Infinity }}
             />
             Trip record
@@ -109,7 +108,7 @@ export function TripPropagationVisual() {
           })}
         </ul>
       </div>
-    </motion.div>
+    </div>
   )
 }
 

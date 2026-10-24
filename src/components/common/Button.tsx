@@ -4,6 +4,10 @@ import { motion } from 'motion/react'
 import { cn } from '@/utils/cn'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
+// Motion goes on the link itself: a wrapper with `whileTap` gets its own tabindex and
+// becomes a second, invisible tab stop in front of every link-style button.
+const MotionLink = motion.create(Link)
+
 type Variant = 'primary' | 'secondary' | 'ghost' | 'outline-light'
 type Size = 'md' | 'lg'
 
@@ -72,29 +76,26 @@ export function Button(props: ButtonProps) {
 
   if ('to' in props && props.to) {
     return (
-      <motion.div className="inline-block" {...motionProps}>
-        <Link to={props.to} onClick={onClick} className={classes}>
-          {children}
-          {icon}
-        </Link>
-      </motion.div>
+      <MotionLink to={props.to} onClick={onClick} className={classes} {...motionProps}>
+        {children}
+        {icon}
+      </MotionLink>
     )
   }
 
   if ('href' in props && props.href) {
     const external = 'external' in props && props.external
     return (
-      <motion.div className="inline-block" {...motionProps}>
-        <a
-          href={props.href}
-          onClick={onClick}
-          className={classes}
-          {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
-        >
-          {children}
-          {icon}
-        </a>
-      </motion.div>
+      <motion.a
+        href={props.href}
+        onClick={onClick}
+        className={classes}
+        {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+        {...motionProps}
+      >
+        {children}
+        {icon}
+      </motion.a>
     )
   }
 

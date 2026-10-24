@@ -1,31 +1,39 @@
 import { cn } from '@/utils/cn'
 
 interface LogoProps {
-  /** 'light' renders for dark surfaces (white/gradient wordmark); 'dark' for light surfaces. */
+  /** 'light' renders for dark surfaces (white wordmark); 'dark' for light surfaces. */
   tone?: 'light' | 'dark'
+  size?: 'sm' | 'lg'
   className?: string
   markOnly?: boolean
 }
 
+const wordmarks = {
+  light: '/logo/hexagen-wordmark-white.png',
+  dark: '/logo/hexagen-wordmark-black.png',
+}
+
+const sizes = {
+  sm: 'h-6 w-auto sm:h-7',
+  lg: 'h-10 w-auto sm:h-12',
+}
+
 /**
- * Hexagen brand mark. Recreates the previous site's brand style: a hexagon
- * mark plus a "HEXAGEN" wordmark carrying the original indigo→violet gradient
- * (#4F46E5 → #7C3AED, matching the old .gradient-text treatment).
- *
- * Built in SVG/CSS so it stays crisp at any size. If an official raster/vector
- * logo asset is provided later, swap it in here — every surface renders the
- * brand through this single component.
+ * Hexagen brand mark. The full logo is the official wordmark artwork in
+ * `public/logo`; `markOnly` keeps a small SVG hexagon for tight spots where
+ * the wordmark would be illegible. Every surface renders the brand through
+ * this single component.
  */
-export function Logo({ tone = 'dark', className, markOnly = false }: LogoProps) {
-  return (
-    <span className={cn('inline-flex items-center gap-2.5', className)}>
+export function Logo({ tone = 'dark', size = 'sm', className, markOnly = false }: LogoProps) {
+  if (markOnly) {
+    return (
       <svg
         width="32"
         height="32"
         viewBox="0 0 32 32"
         fill="none"
         aria-hidden="true"
-        className="shrink-0"
+        className={cn('shrink-0', className)}
       >
         <defs>
           <linearGradient id="hexagenLogoGradient" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
@@ -39,17 +47,8 @@ export function Logo({ tone = 'dark', className, markOnly = false }: LogoProps) 
           fill={tone === 'dark' ? '#FFFFFF' : 'var(--color-ink-900)'}
         />
       </svg>
-      {markOnly ? null : (
-        <span
-          className="bg-clip-text text-lg font-bold tracking-tight text-transparent"
-          style={{
-            fontFamily: 'var(--font-display)',
-            backgroundImage: 'linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%)',
-          }}
-        >
-          HEXAGEN
-        </span>
-      )}
-    </span>
-  )
+    )
+  }
+
+  return <img src={wordmarks[tone]} alt="Hexagen" className={cn(sizes[size], className)} />
 }

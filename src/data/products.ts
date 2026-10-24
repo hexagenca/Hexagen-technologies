@@ -13,8 +13,8 @@ export const flagshipProduct: FlagshipProduct = {
   description:
     'A multi-tenant API platform for real-time media capture. Show a QR code, your customer scans it, and photos, documents, video, signatures and voice notes stream straight into your app — no native install, live over the web.',
   status: 'live',
-  href: 'https://green-wave-0ebabb60f.7.azurestaticapps.net/',
-  docsHref: 'https://green-wave-0ebabb60f.7.azurestaticapps.net/docs',
+  href: 'https://dropwire.hexagen.ca/',
+  docsHref: 'https://dropwire.hexagen.ca/docs',
   highlights: [
     {
       icon: QrCode,

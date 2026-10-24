@@ -143,6 +143,13 @@ This is a static single-page app after `npm run build` (output in `dist/`). Beca
 - Add a `_redirects` file (or `netlify.toml` redirect rule) with `/* /index.html 200` so client-side routes don't 404 on refresh.
 - Set env vars in Site settings → Environment variables.
 
+### GoDaddy (cPanel / Apache)
+
+- Run `npm run build` with `VITE_API_BASE_URL` and `VITE_SITE_URL` set (Vite bakes them in at build time).
+- In cPanel File Manager, back up and clear `public_html/`, then upload the **contents** of `dist/` (not the folder itself) and extract.
+- `public/.htaccess` is copied into `dist/` and provides the SPA fallback and caching. File Manager hides dotfiles by default — enable "Show Hidden Files" to confirm it's there.
+- Once SSL is active, uncomment the HTTPS redirect in `.htaccess`.
+
 ### Traditional static hosting (e.g. Nginx, S3 + CloudFront)
 
 - Upload the contents of `dist/` as-is.

@@ -1,8 +1,7 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'motion/react'
-import { ArrowDown, ArrowUpRight, Bot, Check, PlayCircle, Sparkles } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
+import { motion } from 'motion/react'
+import { ArrowDown, ArrowRight, ArrowUpRight, Bot, Check, Sparkles } from 'lucide-react'
 import { SEO } from '@/components/layout/SEO'
+import { Breadcrumbs } from '@/components/common/Breadcrumbs'
 import { Container } from '@/components/common/Container'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { Button } from '@/components/common/Button'
@@ -13,9 +12,10 @@ import { KineticBand } from '@/components/sections/KineticBand'
 import { TripPropagationVisual } from '@/components/products/TripPropagationVisual'
 import { TmsRoad } from '@/components/products/TmsRoad'
 import { TmsTour } from '@/components/products/TmsTour'
+import { AudienceHub } from '@/components/products/AudienceHub'
+import { TmsLogo } from '@/components/products/TmsLogo'
 import { tmsProduct } from '@/data/tms'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { breadcrumbListStructuredData, softwareApplicationStructuredData } from '@/utils/structuredData'
 import { cn } from '@/utils/cn'
 
@@ -37,25 +37,10 @@ export default function ProductTMS() {
           softwareApplicationStructuredData(product),
         ]}
       />
-      <PageHero
-        eyebrow="Products · Hexagen TMS"
-        title="Hexagen TMS — every trip, one screen"
-        description="Our transportation management system, built in Canada for carriers and brokers who are done running trips across spreadsheets, email threads and five browser tabs."
-        breadcrumbs={[{ label: 'Home', path: '/' }, { label: 'Products', path: '/products' }, { label: product.name }]}
-      >
-        <Button href={product.href} external variant="primary" size="lg" icon={<ArrowUpRight className="size-4" aria-hidden="true" />}>
-          Open Hexagen TMS
-        </Button>
-        <Button href="#tour" variant="outline-light" size="lg" icon={<PlayCircle className="size-4" aria-hidden="true" />}>
-          Watch the tour
-        </Button>
-      </PageHero>
-
-      <Showcase />
+      <Hero />
       <KineticBand words="QUOTE · DISPATCH · TRACK · INVOICE · " accent="ONE RECORD" />
       <Problem />
       <Lifecycle />
-      <Tour />
       <Modules />
       <Hena />
       <Audiences />
@@ -90,100 +75,90 @@ export default function ProductTMS() {
 /* -------------------------------------------------------------------------- */
 
 /**
- * The dark flagship band, built like DropWire's so the two products read as a
- * family: copy and highlights on the left, the product demonstrating itself on
- * the right (one trip status reaching every view), drifting gently against the
- * scroll on desktop only.
+ * Product-led hero: the pitch and both ways in up top, then the real
+ * recording of the product straight underneath, so the live product is on
+ * the first screen instead of a third of the way down. The four highlights
+ * close the hero as the supporting evidence.
  */
-function Showcase() {
+function Hero() {
   const reducedMotion = useReducedMotion()
-  const sectionRef = useRef<HTMLElement>(null)
-  const desktop = useMediaQuery('(min-width: 1024px)')
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] })
-  const visualY = useTransform(scrollYProgress, [0, 1], [44, -44])
-  const parallax = desktop && !reducedMotion
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden bg-[var(--color-ink)] py-20 sm:py-28"
-      style={{ backgroundImage: 'var(--gradient-hero-glow)' }}
-    >
-      <Container>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <AnimatedSection className="flex flex-col items-start">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-white/80">
-              <span className="relative flex size-2">
-                {!reducedMotion && (
-                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                )}
-                <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+    <section className="relative overflow-hidden bg-gradient-ink pb-20 pt-36 sm:pb-24 sm:pt-40">
+      <div aria-hidden="true" className="absolute inset-0 bg-grid-dark opacity-30" />
+      <div aria-hidden="true" className="absolute inset-0 bg-hero-glow" />
+      <Container className="relative">
+        <Breadcrumbs
+          items={[{ label: 'Home', path: '/' }, { label: 'Products', path: '/products' }, { label: product.name }]}
+          tone="dark"
+        />
+
+        <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-16">
+          <AnimatedSection className="max-w-3xl">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+              <TmsLogo tone="light" size="lg" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-white/80">
+                <span className="relative flex size-2">
+                  {!reducedMotion && (
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  )}
+                  <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+                </span>
+                Live product
               </span>
-              Live product
-            </span>
-
-            <p className="mt-6 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Hexagen <span className="text-[var(--color-primary-light)]">TMS</span>
-            </p>
-            <p className="mt-3 text-lg font-medium text-white/85 sm:text-xl">{product.tagline}</p>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--color-text-ondark-muted)]">
-              {product.description}
-            </p>
-
-            <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
-              {product.highlights.map((h) => {
-                const Icon = h.icon
-                return (
-                  <li key={h.label} className="flex gap-3">
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-white/10 bg-white/5 text-[var(--color-primary-light)]">
-                      <Icon className="size-[1.125rem]" strokeWidth={1.75} aria-hidden="true" />
-                    </span>
-                    <span>
-                      <span className="block text-sm font-semibold text-white">{h.label}</span>
-                      <span className="mt-0.5 block text-sm leading-relaxed text-[var(--color-text-ondark-muted)]">
-                        {h.description}
-                      </span>
-                    </span>
-                  </li>
-                )
-              })}
-            </ul>
-
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Button href={product.href} external variant="primary" size="lg" icon={<ArrowUpRight className="size-[1.125rem]" aria-hidden="true" />}>
-                Open Hexagen TMS
-              </Button>
-              <Button href={product.trialHref} external variant="outline-light" size="lg">
-                Start free trial
-              </Button>
             </div>
+            <h1 className="mt-7 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Every trip, <span className="text-gradient-brand">one screen</span>
+            </h1>
+            <p className="mt-5 max-w-2xl text-balance text-lg leading-relaxed text-[var(--color-text-ondark-muted)]">
+              Our transportation management system, built in Canada for carriers and brokers who are done running
+              trips across spreadsheets, email threads and five browser tabs.
+            </p>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.1} className="relative">
-            <motion.div style={parallax ? { y: visualY } : undefined} className="flex flex-col items-center">
-              <div
-                aria-hidden="true"
-                className="absolute -inset-6 rounded-[var(--radius-2xl)] opacity-70 blur-2xl"
-                style={{ background: 'var(--gradient-brand-soft)' }}
-              />
-              <div className="relative flex w-full justify-center">
-                <TripPropagationVisual />
-              </div>
-              <p className="relative mt-6 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2 text-xs text-white/60">
-                One status change — every view updates at once
-              </p>
-            </motion.div>
+          <AnimatedSection delay={0.08} className="flex flex-wrap gap-3 lg:justify-end">
+            <Button href={product.href} external variant="primary" size="lg" icon={<ArrowUpRight className="size-4" aria-hidden="true" />}>
+              Open Hexagen TMS
+            </Button>
+            <Button href={product.trialHref} external variant="outline-light" size="lg">
+              Start free trial
+            </Button>
           </AnimatedSection>
         </div>
+
+        <AnimatedSection id="tour" delay={0.12} className="mt-12 scroll-mt-28 sm:mt-14">
+          <TmsTour tone="dark" priority />
+        </AnimatedSection>
+
+        <ul className="mt-14 grid grid-cols-1 gap-6 border-t border-white/10 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+          {product.highlights.map((h) => {
+            const Icon = h.icon
+            return (
+              <li key={h.label} className="flex gap-3">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-white/10 bg-white/5 text-[var(--color-primary-light)]">
+                  <Icon className="size-[1.125rem]" strokeWidth={1.75} aria-hidden="true" />
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold text-white">{h.label}</span>
+                  <span className="mt-0.5 block text-sm leading-relaxed text-[var(--color-text-ondark-muted)]">
+                    {h.description}
+                  </span>
+                </span>
+              </li>
+            )
+          })}
+        </ul>
       </Container>
     </section>
   )
 }
 
 /**
- * "The same trip, typed five times": the five scattered copies settle into a
- * row, each is struck through in turn, and the one record drops in beneath
- * them. Under reduced motion the finished state renders at once.
+ * "The same trip, typed five times", as a before and after. Before: the five
+ * scattered copies settle into a row, each is struck through in turn, and the
+ * one record drops in beneath them. After: that record, with every view that
+ * reads it updating in the same beat. Under reduced motion the finished state
+ * renders at once.
  */
 function Problem() {
   const reducedMotion = useReducedMotion()
@@ -203,50 +178,67 @@ function Problem() {
           title="The same trip, typed five times"
           description="A load gets quoted in a spreadsheet, confirmed by email, planned on a whiteboard, tracked in a telematics tab and billed in accounting software. Every copy drifts. Hexagen TMS keeps one record of the trip, and every screen reads it."
         />
-        <motion.div
-          className="mt-12 flex flex-col items-center gap-6"
-          initial={reducedMotion ? false : 'scattered'}
-          whileInView="settled"
-          viewport={{ once: true, amount: 0.6 }}
-          variants={{ settled: { transition: { staggerChildren: 0.12 } } }}
-        >
-          <ul className="flex flex-wrap justify-center gap-2" aria-label="What Hexagen TMS replaces">
-            {product.replaces.map((item, i) => (
-              <motion.li
-                key={item}
-                variants={{
-                  scattered: { ...scatter[i % scatter.length], opacity: 0 },
-                  settled: { x: 0, y: 0, rotate: 0, opacity: 1, transition: { type: 'spring', stiffness: 220, damping: 20 } },
-                }}
-                className="relative rounded-full border border-[var(--color-surface-border)] bg-[var(--color-surface-muted)] px-4 py-2 text-sm font-medium text-[var(--color-text-onlight-muted)]"
-              >
-                {item}
-                <motion.span
-                  aria-hidden="true"
-                  className="absolute inset-x-3 top-1/2 h-0.5 origin-left rounded-full bg-[var(--color-primary)]/60"
+        <div className="mt-14 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-8">
+          <motion.div
+            className="flex flex-col items-center justify-center gap-6 rounded-[var(--radius-xl)] border border-[var(--color-surface-border)] bg-[var(--color-surface-muted)] px-6 py-10"
+            initial={reducedMotion ? false : 'scattered'}
+            whileInView="settled"
+            viewport={{ once: true, amount: 0.6 }}
+            variants={{ settled: { transition: { staggerChildren: 0.12 } } }}
+          >
+            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-onlight-muted)]">Before</p>
+            <ul className="flex flex-wrap justify-center gap-2" aria-label="What Hexagen TMS replaces">
+              {product.replaces.map((item, i) => (
+                <motion.li
+                  key={item}
                   variants={{
-                    scattered: { scaleX: 0 },
-                    settled: { scaleX: 1, transition: { delay: 0.7 + i * 0.12, duration: 0.35 } },
+                    scattered: { ...scatter[i % scatter.length], opacity: 0 },
+                    settled: { x: 0, y: 0, rotate: 0, opacity: 1, transition: { type: 'spring', stiffness: 220, damping: 20 } },
                   }}
-                />
-              </motion.li>
-            ))}
-          </ul>
-          <motion.span
-            variants={{ scattered: { opacity: 0, y: -8 }, settled: { opacity: 1, y: 0, transition: { delay: 1.4 } } }}
+                  className="relative rounded-full border border-[var(--color-surface-border)] bg-[var(--color-surface-muted)] px-4 py-2 text-sm font-medium text-[var(--color-text-onlight-muted)]"
+                >
+                  {item}
+                  <motion.span
+                    aria-hidden="true"
+                    className="absolute inset-x-3 top-1/2 h-0.5 origin-left rounded-full bg-[var(--color-primary)]/60"
+                    variants={{
+                      scattered: { scaleX: 0 },
+                      settled: { scaleX: 1, transition: { delay: 0.7 + i * 0.12, duration: 0.35 } },
+                    }}
+                  />
+                </motion.li>
+              ))}
+            </ul>
+            <motion.span
+              variants={{ scattered: { opacity: 0, y: -8 }, settled: { opacity: 1, y: 0, transition: { delay: 1.4 } } }}
+            >
+              <ArrowDown className="size-5 text-[var(--color-primary)]" aria-hidden="true" />
+            </motion.span>
+            <motion.p
+              variants={{
+                scattered: { opacity: 0, scale: 0.6 },
+                settled: { opacity: 1, scale: 1, transition: { delay: 1.55, type: 'spring', stiffness: 300, damping: 18 } },
+              }}
+              className="rounded-full bg-gradient-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-glow-primary)]"
+            >
+              One record of the trip
+            </motion.p>
+          </motion.div>
+
+          <div aria-hidden="true" className="flex items-center justify-center text-[var(--color-primary)]">
+            <ArrowDown className="size-6 lg:hidden" />
+            <ArrowRight className="hidden size-6 lg:block" />
+          </div>
+
+          <div
+            className="flex flex-col items-center justify-center gap-6 rounded-[var(--radius-xl)] bg-[var(--color-ink)] px-6 py-10"
+            style={{ backgroundImage: 'var(--gradient-hero-glow)' }}
           >
-            <ArrowDown className="size-5 text-[var(--color-primary)]" aria-hidden="true" />
-          </motion.span>
-          <motion.p
-            variants={{
-              scattered: { opacity: 0, scale: 0.6 },
-              settled: { opacity: 1, scale: 1, transition: { delay: 1.55, type: 'spring', stiffness: 300, damping: 18 } },
-            }}
-            className="rounded-full bg-gradient-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-glow-primary)]"
-          >
-            One record of the trip
-          </motion.p>
-        </motion.div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/60">With Hexagen TMS</p>
+            <TripPropagationVisual />
+            <p className="text-center text-sm text-white/70">One status change — every view updates at once.</p>
+          </div>
+        </div>
       </Container>
     </section>
   )
@@ -263,23 +255,6 @@ function Lifecycle() {
           description="Each step picks up where the last one left off, on the same trip."
         />
         <TmsRoad />
-      </Container>
-    </section>
-  )
-}
-
-function Tour() {
-  return (
-    <section id="tour" className="scroll-mt-24 bg-white py-20 sm:py-24">
-      <Container>
-        <SectionHeading
-          eyebrow="Product tour"
-          title="See it run, screen by screen"
-          description="Two and a half minutes through the real product — pick a chapter to jump straight to the part you care about."
-        />
-        <AnimatedSection delay={0.05} className="mt-14">
-          <TmsTour />
-        </AnimatedSection>
       </Container>
     </section>
   )
@@ -424,29 +399,14 @@ function TypingDots() {
 
 function Audiences() {
   return (
-    <section className="bg-white py-20 sm:py-24">
+    <section className="overflow-x-clip bg-white py-20 sm:py-24">
       <Container>
         <SectionHeading
           eyebrow="Who it's for"
           title="One record, a view for every person"
           description="Everyone who touches a trip works from the same record — each with the screen that fits their job."
         />
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {product.audiences.map((audience, i) => {
-            const Icon = audience.icon
-            return (
-              <AnimatedSection
-                key={audience.label}
-                delay={i * 0.06}
-                className="rounded-[var(--radius-xl)] border border-[var(--color-surface-border)] bg-[var(--color-surface-muted)] p-6"
-              >
-                <Icon className="size-6 text-[var(--color-primary-dark)]" strokeWidth={1.75} aria-hidden="true" />
-                <h3 className="mt-4 text-base font-semibold text-[var(--color-text-onlight)]">{audience.label}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-[var(--color-text-onlight-muted)]">{audience.description}</p>
-              </AnimatedSection>
-            )
-          })}
-        </div>
+        <AudienceHub />
       </Container>
     </section>
   )

@@ -16,6 +16,6 @@ export const company = {
     full: '302 Edenbrook Hill Dr, Ontario, Canada, L7A 2L7',
   },
   // NOTE: placeholder social link — replace with the real Hexagen LinkedIn URL before launch.
-  linkedin: 'https://www.linkedin.com/company/hexagen',
+  linkedin: 'https://www.linkedin.com/company/hexagen-technologies-inc/posts/?feedView=all',
   siteUrl: import.meta.env.VITE_SITE_URL ?? 'https://www.hexagen.ca',
 } as const

@@ -7,7 +7,7 @@ export const mainNavigation: NavigationItem[] = [
     label: 'Products',
     path: '/products',
     children: [
-      { label: 'Hexagen TMS', path: tmsProduct.overviewPath, description: 'Transportation management — live' },
+      { label: 'Hexagen TMS', path: tmsProduct.href, description: 'Transportation management — live', external: true },
       { label: 'DropWire', path: flagshipProduct.href, description: 'Real-time mobile capture — live', external: true },
       { label: 'DropWire developer docs', path: flagshipProduct.docsHref, description: 'SDKs, guides and API reference', external: true },
       { label: 'All products', path: '/products', description: 'Every Hexagen product in one place' },
@@ -32,7 +32,7 @@ export const mainNavigation: NavigationItem[] = [
 
 export const footerNavigation = {
   products: [
-    { label: 'Hexagen TMS', path: tmsProduct.overviewPath },
+    { label: 'Hexagen TMS', path: tmsProduct.href, external: true },
     { label: 'DropWire', path: flagshipProduct.href, external: true },
     { label: 'DropWire Docs', path: flagshipProduct.docsHref, external: true },
     { label: 'All Products', path: '/products' },

@@ -62,7 +62,7 @@ const ITEMS: LineupItem[] = [
  */
 export function ProductLineup() {
   return (
-    <section id="lineup" className="bg-white py-20 sm:py-24">
+    <section id="lineup" className="overflow-hidden bg-white py-20 sm:py-24">
       <Container>
         <SectionHeading
           eyebrow="Our products"
